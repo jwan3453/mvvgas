@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Issue;
 use App\IssueItem;
-use App\Location;
+use App\StoreLocation;
 use App\StoreFeature;
 use Illuminate\Support\Facades\DB;
 use \Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -198,7 +198,7 @@ class IssueController extends Controller
 	}
 	
 	public function getAllLocations() {
-		$locations = Location::all();
+		$locations = StoreLocation::all();
 		return response()->json([
 			'status' => 'ok',
 			'locations' => $locations,
@@ -215,7 +215,7 @@ class IssueController extends Controller
 	
 	public function getAllFilterItems() {
 		$issueItems = IssueItem::all();
-		$locations = Location::all();
+		$locations = StoreLocation::all();
 		$storeFeatures = StoreFeature::all();
 		return response()->json([
 			'status' => 'ok',
