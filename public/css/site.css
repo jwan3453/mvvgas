@@ -1,0 +1,896 @@
+
+a {
+    text-decoration:none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+
+    -webkit-user-select: none;
+
+    -moz-user-focus: none;
+
+    -moz-user-select: none;
+    color:black;
+}
+
+.site-header {
+    padding: 10px 80px 20px 80px;
+    border-bottom: 1px solid black;
+    position: relative;
+}
+
+.site-logo{
+    background-size: 62px 56px;
+    background-image: url('../img/logo.png');
+    width: 62px;
+    height: 56px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.header-btn {
+    height: 30px;
+    width:120px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 14px;
+    color:black;
+    margin-left: 20px ;
+    border:1px solid black;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    cursor:pointer;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.logout-btn {
+    height: 30px;
+    width:100px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 16px;
+    color:black;
+
+    border:1px solid black;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    cursor:pointer;
+    display: inline-block;
+    vertical-align: middle;
+    float:right;
+    margin: 12px 20px 0 0 ;
+}
+
+.store-text{
+    width: 200px;
+    position: absolute;
+    vertical-align: middle;
+    font-size: 18px;
+    margin: auto;
+    display: inline-block;
+    text-align: center;
+    left: calc( 50% - 100px);
+    margin-top: 15px;
+}
+
+.login-panel {
+    text-align: center;
+    padding-top:150px;
+}
+
+.login-label {
+    font-size: 24px;
+    display: block;
+}
+
+.pin-input {
+    width:200px;
+    height: 30px;
+    padding-left:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius:10px;
+    outline-style: none ;
+    outline-width: 0px ;
+    border:1px solid black;
+    margin-top:15px;
+}
+
+.login-btn {
+    width: 150px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 16px;
+    color:black;
+    margin: 20px auto;
+    border:1px solid black;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius:10px;
+    cursor:pointer;
+
+}
+
+
+/******* admin overview page ******/
+
+.map-overview {
+    min-width: 1260px;
+    height: auto;
+}
+
+.map-grid {
+    width: calc( 33% - 2px );
+    height: 380px;
+    border:1px solid black;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+}
+
+.store-name {
+    width: 100%;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 20px;
+    text-align: center;
+}
+
+.issue-count {
+    position:absolute;
+    width:100%;
+    bottom:10px;
+    text-align: center;
+    font-size: 18px;
+}
+
+
+/**********************************/
+
+/***********map*******************/
+
+/*td {*/
+    /*text-align: center;*/
+/*}*/
+
+
+.map-container-wrapper {
+    text-align: center;
+
+}
+
+.map-container {
+
+    margin: 30px auto;
+    position:relative;
+    display: inline-block;
+}
+.map-container-small {
+    display: inline-block;
+}
+
+    /***** store 1 *********/
+
+.express1-left-small{
+
+    height: auto;
+    border-collapse:collapse;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.express1-left-small td {
+    padding: 4px 8px;
+    border:1px solid black;
+    cursor:pointer;
+    font-size: 12px;
+}
+
+.express1-store-small {
+    width: 200px;
+    height: 80px;
+    border:1px solid black;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 100px;
+    line-height: 80px;
+    font-size: 20px;
+    text-align: center;
+    margin-top:50px;
+}
+
+.express1-left-regular{
+
+    height: auto;
+    border-collapse:collapse;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.express1-left-regular td {
+    padding: 20px 40px;
+    border:1px solid black;
+    cursor:pointer;
+}
+
+.express1-store-regular {
+    width: 400px;
+    height: 250px;
+    border:1px solid black;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 200px;
+    line-height: 250px;
+    font-size: 20px;
+    text-align: center;
+    margin-top:50px;
+}
+/************************************/
+
+
+/***** store 2 *********/
+.express2-bottom-small{
+
+    height: auto;
+    border-collapse:collapse;
+    margin: 20px 0 0 20px;
+}
+
+.express2-bottom-small td {
+    padding: 8px 4px;
+    border:1px solid black;
+    cursor:pointer;
+    font-size: 12px;
+}
+
+.express2-store-small {
+    width: 200px;
+    height: 125px;
+    border:1px solid black;
+    display: block;
+    vertical-align: middle;
+
+    line-height: 125px;
+    font-size: 16px;
+    text-align: center;
+
+}
+.express2-bottom-regular{
+
+    height: auto;
+    border-collapse:collapse;
+    margin: 50px 0 0 50px;
+}
+
+.express2-bottom-regular td {
+    padding: 40px 20px;
+    border:1px solid black;
+    cursor:pointer;
+}
+
+.express2-store-regular {
+    width: 400px;
+    height: 250px;
+    border:1px solid black;
+    display: block;
+    vertical-align: middle;
+
+    line-height: 250px;
+    font-size: 20px;
+    text-align: center;
+    margin-top:50px;
+}
+/************************************/
+
+
+/***** store 3 *********/
+
+.express3-middle-small{
+
+    height: auto;
+    border-collapse:collapse;
+    margin: 20px 0 0 30px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.express3-middle-small td {
+    padding: 4px;
+    border:1px solid black;
+    cursor:pointer;
+    font-size: 12px;
+}
+
+.express3-store-small {
+    width: 200px;
+    height: 125px;
+    border:1px solid black;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 125px;
+    font-size: 16px;
+    text-align: center;
+    margin-top:50px;
+}
+
+.express3-store-carwash-small {
+    width:80px;
+    height: 80px;
+    border: 1px solid black;
+    line-height: 50px;
+    vertical-align: top;
+    display: inline-block;
+    margin-left: 30px;
+    font-size: 16px;
+}
+
+
+
+.express3-middle-regular{
+
+    height: auto;
+    border-collapse:collapse;
+    margin: 50px 0 0 100px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.express3-middle-regular td {
+    padding: 20px;
+    border:1px solid black;
+    cursor:pointer;
+}
+
+.express3-store-regular {
+    width: 400px;
+    height: 250px;
+    border:1px solid black;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 250px;
+    font-size: 20px;
+    text-align: center;
+    margin-top:50px;
+}
+
+.express3-store-carwash-regular {
+    width:150px;
+    height: 150px;
+    border: 1px solid black;
+    line-height: 150px;
+    vertical-align: top;
+    display: inline-block;
+    margin-left: 100px;
+}
+
+/************************************/
+
+
+/***** store 4 *********/
+.express4-bottom-small{
+
+    height: auto;
+    border-collapse:collapse;
+    margin: 20px 0 0 0;
+}
+
+.express4-bottom-small td {
+    padding: 4px 8px;
+    border:1px solid black;
+    cursor:pointer;
+    font-size: 12px;
+}
+
+.express4-store-small {
+    width: 200px;
+    height: 125px;
+    border:1px solid black;
+    display: block;
+    vertical-align: middle;
+
+    line-height: 125px;
+    font-size: 16px;
+    text-align: center;
+
+}
+
+.express4-bottom-regular{
+
+    height: auto;
+    border-collapse:collapse;
+    margin: 50px 0 0 0;
+}
+
+.express4-bottom-regular td {
+    padding: 20px 40px;
+    border:1px solid black;
+    cursor:pointer;
+}
+
+.express4-store-regular {
+    width: 400px;
+    height: 250px;
+    border:1px solid black;
+    display: block;
+    vertical-align: middle;
+
+    line-height: 250px;
+    font-size: 20px;
+    text-align: center;
+    margin-top:50px;
+}
+/************************************/
+
+
+/***** store 5 *********/
+.express5-bottom-small{
+
+    height: auto;
+    border-collapse:collapse;
+    margin: 20px 0 0 0;
+}
+
+.express5-bottom-small td {
+    padding: 4px;
+    border:1px solid black;
+    cursor:pointer;
+}
+
+.express5-store-small {
+    width: 200px;
+    height: 125px;
+    border:1px solid black;
+    display: block;
+    vertical-align: middle;
+
+    line-height: 125px;
+    font-size: 16px;
+    text-align: center;
+
+}
+
+.express5-bottom-regular{
+
+    height: auto;
+    border-collapse:collapse;
+    margin: 50px 0 0 0;
+}
+
+.express5-bottom-regular td {
+    padding: 20px 20px;
+    border:1px solid black;
+    cursor:pointer;
+}
+
+.express5-store-regular {
+    width: 400px;
+    height: 250px;
+    border:1px solid black;
+    display: block;
+    vertical-align: middle;
+
+    line-height: 250px;
+    font-size: 20px;
+    text-align: center;
+    margin-top:50px;
+}
+/************************************/
+
+
+/***** store 10 *********/
+
+.express10-topleft-small {
+    height: auto;
+    border-collapse:collapse;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.express10-topleft-small td {
+    padding: 4px;
+    border:1px solid black;
+    font-size: 12px;
+}
+
+
+.express10-store-small {
+    width: 160px;
+    height: 60px;
+    border:1px solid black;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 30px;
+    line-height: 60px;
+    font-size: 14px;
+    text-align: center;
+
+}
+
+
+.express10-carwash-small {
+    width: 100px;
+    height: 30px;
+    border:1px solid black;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    text-align: center;
+}
+
+
+.express10-bottomleft-small {
+
+    border-collapse:collapse;
+    display: inline-block;
+    vertical-align: top;
+    margin: 20px 50px 0 20px;
+}
+
+.express10-bottomleft-small td {
+    padding: 4px;
+    border:1px solid black;
+    cursor:pointer;
+}
+
+.express10-bottomright-small {
+    border-collapse:collapse;
+    display: inline-block;
+    vertical-align: top;
+    margin-top:20px;
+}
+
+.express10-bottomright-small td {
+    padding: 4px;
+    border:1px solid black;
+    cursor:pointer;
+
+}
+
+
+.express10-topleft-regular{
+    width: 300px;
+    height: auto;
+    border-collapse:collapse;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.express10-topleft-regular td {
+    padding: 20px;
+    border:1px solid black;
+    cursor:pointer;
+}
+
+.express10-store-regular {
+    width: 500px;
+    height: 200px;
+    border:1px solid black;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 100px;
+    line-height: 200px;
+    font-size: 20px;
+    text-align: center;
+
+}
+
+.express10-carwash-regular {
+    width: 200px;
+    height: 60px;
+    border:1px solid black;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 50px;
+    line-height: 60px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.express10-bottomleft-regular {
+
+    border-collapse:collapse;
+    display: inline-block;
+    vertical-align: top;
+    margin: 50px 200px 0 50px;
+}
+
+.express10-bottomleft-regular td {
+    padding: 20px;
+    border:1px solid black;
+    cursor:pointer;
+}
+
+.express10-bottomright-regular {
+    border-collapse:collapse;
+    display: inline-block;
+    vertical-align: top;
+    margin-top:50px;
+}
+
+.express10-bottomright-regular td {
+    padding: 20px;
+    border:1px solid black;
+    cursor:pointer;
+
+}
+
+/************************************/
+
+
+/*********issue list ********/
+.issue-list-table {
+    padding:50px 80px;
+}
+.issue-list-header {
+    padding: 20px 0;
+    overflow: hidden;
+}
+.issue-header-text {
+    font-size: 20px;
+    float:left;
+}
+.view-issue-btn {
+    width: 150px;
+    height: 30px;
+    border-radius: 5px;
+    float:right;
+    border:1px solid black;
+    text-align: center;
+    line-height: 30px;
+}
+/***************************/
+
+/********modal**************/
+
+.page-modal {
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    height:100%;
+    width:100%;
+    background-color: rgba(0,0,0,0.7);
+    display:none;
+}
+.issue-panel{
+    top:50px;
+    left: calc( 50% - 225px );
+    position:absolute;
+    width: 450px;
+    height: 650px;
+    background:white;
+
+}
+.issue-panel .title {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+    border-bottom: 1px solid black;
+}
+
+.issue-reported, .issue-diagnosed{
+
+}
+.issue-reported  label, .issue-diagnosed label{
+    font-weight: bold;
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: top;
+}
+.issue-reported  div , .issue-diagnosed div {
+    width:250px;
+    vertical-align: top;
+    display: inline-block;
+    font-size: 14px;
+    margin-left:20px;
+}
+
+
+.issue-description {
+    margin-top:10px;
+}
+
+.issue-description label {
+    display: block;
+    font-size: 14px;
+}
+.issue-description textarea {
+    width: 100%;
+    height: 200px;
+}
+
+.issue-item-list {
+    margin-top:10px;
+    height:405px;
+    overflow-y: scroll;
+
+}
+
+.issue-item-list .issue-item {
+    width:100%;
+    border-radius: 5px;
+    height: 40px;
+    line-height: 40px;
+    padding-left:30px;
+    font-size: 14px;
+    border:1px solid black;
+    margin: 5px 0;
+}
+
+.issue-item-list .item-selected {
+    background-color: rgba(198, 198, 198, 1);
+    box-sizing: border-box;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgba(121, 121, 121, 1);
+}
+
+
+.submit-issue-btns {
+    margin-top: 20px;
+    display: none;
+}
+
+.option-btn {
+    margin-top:20px;
+    width: 180px;
+    height: 40px;
+    border-radius: 5px;
+    float:right;
+    border:1px solid black;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+.on-hold-btn {
+    float:left;
+}
+
+.close-issue-btn {
+    float:right;
+}
+
+.continue-btn {
+    float:right;
+}
+
+
+.alert-box {
+    position: fixed;
+    top: 10px;
+    left: calc(50% - 100px);
+    color: white;
+    width: 220px;
+    padding:15px 0;
+    min-height: 10px;
+    background-color: #ff5f76;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    display: none;
+    z-index: 1100;
+}
+
+.success-toast {
+    background-color: rgb(50,205,255);
+}
+
+.wrong-input {
+    border: 1px solid #ff5f76 !important;
+    z-index: 9999;
+}
+
+/************************* */
+
+/****closed issue page******/
+.search-bar {
+    padding:10px 0 20px 0 ;
+}
+.search-bar label {
+    font-weight: bold;
+    font-size:14px;
+    display: block;
+}
+
+.date-filter-section {
+    display: inline-block;
+
+}
+.date-field {
+
+}
+.date-field input {
+    display: inline-block;
+    height:25px;
+    width:150px;
+    border:1px solid black;
+    border-radius: 5px;
+    line-height: 25px;
+    font-size: 12px;
+    padding-left: 10px;
+}
+.common-filter-section {
+    display: inline-block;
+    margin-left:20px;
+    width:150px;
+}
+
+.common-filter-section select {
+    width:150px;
+    height:25px;
+    font-size: 12px;
+}
+.common-filter-section select option {
+    font-size: 12px;
+}
+
+.search-btn, .export-data-btn{
+    height: 25px;
+    width:100px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 14px;
+    color:black;
+    margin-left: 20px ;
+    border:1px solid black;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    cursor:pointer;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.export-data-panel{
+    top:50px;
+    left: calc( 50% - 225px );
+    position:absolute;
+    width: 450px;
+    height: 400px;
+    background:white;
+}
+
+.export-data-panel .title {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+    border-bottom: 1px solid black;
+}
+
+.export-filters {
+    padding: 30px 30px 10px 30px;
+}
+.export-filters label {
+    font-weight: bold;
+    font-size:14px;
+    display: block;
+}
+.export-filters .common-filter-section {
+    margin: 10px;
+}
+.export-to-file-btn {
+    height: 30px;
+    width:90%;
+    text-align: center;
+    line-height: 20px;
+    font-size: 14px;
+    color:black;
+    margin: 20px auto;
+    border:1px solid black;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    cursor:pointer;
+    display: block;
+    vertical-align: middle;
+}
+
+/***************************/
