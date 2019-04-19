@@ -8,4 +8,5 @@ class StoreFeature extends Model
 {
     //
 	protected $table = 'store_feature';
+	public $timestamps = false;
 }
