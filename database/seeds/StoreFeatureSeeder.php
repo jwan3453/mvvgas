@@ -14,7 +14,7 @@ class StoreFeatureSeeder extends Seeder
 	{
 		//
 		// Let's truncate our existing records to start from scratch.
-		StoreLocation::truncate();
+		StoreFeature::truncate();
 		
 		$faker = \Faker\Factory::create();
 		
@@ -129,8 +129,9 @@ class StoreFeatureSeeder extends Seeder
 		
 		
 		foreach($storeFeatures as $storeFeature) {
-			StoreLocation::create([
-				'feature' => $storeFeature['feature'],
+			StoreFeature::create([
+				'location' => $storeFeature['location'],
+				'feature' => $storeFeature['feature']
 			]);
 		}
 		
