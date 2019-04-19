@@ -26,16 +26,17 @@ class UsersTableSeeder extends Seeder
 			'name' => 'Administrator',
 			'store_pin' => '1234',
 			'password' => $password,
+			'role' =>1
 		]);
 		
-		// And now let's generate a few dozen users for our app:
-		for ($i = 0; $i < 1; $i++) {
-			User::create([
-				'name' => $faker->name,
-				'store_pin' => $faker->email,
-				'password' => $password,
-				'role' => 1,
-			]);
-		}
+		User::create([
+			'name' => 'employee',
+			'store_pin' => '1111',
+			'password' => $password,
+			'role' =>2,
+			'location'=>10
+		]);
+		
+
 	}
 }
