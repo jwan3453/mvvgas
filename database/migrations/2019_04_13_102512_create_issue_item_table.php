@@ -18,6 +18,7 @@ class CreateIssueItemTable extends Migration
 			$table->increments('id');
 			$table->string('type');
 			$table->string('name', 255);
+			
 		});
     }
 

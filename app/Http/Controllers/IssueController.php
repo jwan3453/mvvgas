@@ -7,10 +7,14 @@ use App\Issue;
 use App\IssueItem;
 use App\StoreLocation;
 use App\StoreFeature;
+use App\NotificationList;
 use Illuminate\Support\Facades\DB;
 use \Illuminate\Database\Eloquent\ModelNotFoundException;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Response;
+use Twilio\Rest\Client;
+
+use Illuminate\Support\Facades\Mail;
 
 
 class IssueController extends Controller
@@ -92,14 +96,6 @@ class IssueController extends Controller
 			'rows'   => $result,
 		]);
 	}
-//	public function show($id)
-//	{
-//		return Issue::find($id);
-//	}
-//	public function store(Request $request) {
-//		return Issue::create($request->all());
-//	}
-
 
 
 	public function createIssue(Request $request){
@@ -121,6 +117,16 @@ class IssueController extends Controller
 		
 		if(!$result) {
 			$status = 'fail';
+		} else {
+			$storeLocation = StoreLocation::find($newIssue->location);
+			if(isset($storeLocation)) {
+				if($storeLocation->email != null) {
+					$this->sendIssueStatusEmail('none',$newIssue,$storeLocation->email);
+				}
+				if($storeLocation->mobile != null) {
+					$this->sendIssueStatusMsg('none',$newIssue,$storeLocation->mobile);
+				}
+			}
 		}
 		return response()->json([
 			'status' => $status,
@@ -129,14 +135,7 @@ class IssueController extends Controller
 	}
 
 
-
-
-
-
-
-
-
-
+	
 
 	public function updateIssue(Request $request, $id)
 	{
@@ -144,10 +143,22 @@ class IssueController extends Controller
 		try {
 			// find user
 			$issue = Issue::findOrFail($id);
+			$originStatus = $issue->status;
 			$result =  $issue->update($request->all());
 			$status = 'ok';
 			if(!$result) {
 				$status = 'fail';
+			} else {
+				$storeLocation = StoreLocation::find($issue->location);
+				if(isset($storeLocation)) {
+					if($storeLocation->email != null) {
+						$this->sendIssueStatusEmail($originStatus,$issue,$storeLocation->email);
+					}
+					if($storeLocation->mobile != null) {
+						$this->sendIssueStatusMsg($originStatus,$issue,$storeLocation->mobile);
+					}
+				}
+				
 			}
 			
 			return response()->json([
@@ -303,4 +314,72 @@ class IssueController extends Controller
 		
 		
 	}
+	
+	function sendIssueStatusEmail($originStatus, $issue, $address){
+		
+		
+		$type = 'email';
+		$fromStatus = $originStatus;
+		$feature = $issue->feature;
+		$location = $issue->location;
+		$toStatus = $issue->status;
+		$description = $issue->description;
+		$toAddress = $address;
+		
+		$message = 'Location #'.$issue->location.' '.$issue->feature.' change status from '.$fromStatus.' to '.$toStatus.'. Description: '.$issue->description;
+		$subject = 'Location #'.$issue->location.' '.$issue->feature;
+		$result = Mail::send(
+			'emails.notification',
+			['content' => $message],
+			function ($message) use($toAddress, $subject) {
+				$message->to($toAddress)->subject($subject);
+			}
+		);
+		if( count(Mail::failures()) == 0 ) {
+			//to do save to database
+			$newMobileNotification =  new NotificationList();
+			$newMobileNotification->type = $type;
+			$newMobileNotification->feature = $feature;
+			$newMobileNotification->location = $location;
+			$newMobileNotification->from_status = $fromStatus;
+			$newMobileNotification->to_status = $toStatus;
+			$newMobileNotification->description = $description;
+			$newMobileNotification->address = $toAddress;
+			$newMobileNotification->save();
+		}
+	
+	}
+	
+	function sendIssueStatusMsg($originStatus, $issue, $address){
+		
+		$type = 'message';
+		$fromStatus = $originStatus;
+		$feature = $issue->feature;
+		$location = $issue->location;
+		$toStatus = $issue->status;
+		$description = $issue->description;
+		$toAddress = $address;
+		
+		$client = new Client(config('site.twilio_acount_id'), config('site.twilio_token'));
+		$result = $client->messages->create(
+			$toAddress,
+			array(
+				'from' => config('site.twilio_number'),
+				'body' => 'Location #'.$issue->location.' '.$issue->feature.' change status from '.$fromStatus.' to '.$toStatus.'. Description: '.$issue->description
+			)
+		);
+		if(isset($result) && $result->errorCode == null) {
+			//to do save to database
+			$newMobileNotification =  new NotificationList();
+			$newMobileNotification->type = $type;
+			$newMobileNotification->feature = $feature;
+			$newMobileNotification->location = $location;
+			$newMobileNotification->from_status = $fromStatus;
+			$newMobileNotification->to_status = $toStatus;
+			$newMobileNotification->description = $description;
+			$newMobileNotification->address = $toAddress;
+			$newMobileNotification->save();
+		}
+	}
+	
 }
