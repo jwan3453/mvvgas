@@ -68,7 +68,8 @@ class LoginController extends Controller
 		
 		if ($this->attemptLogin($request)) {
 			$user = $this->guard()->user();
-			$user->generateToken();
+			if(!$user->api_token)
+				$user->generateToken();
 			return response()->json([
 				'response' => $user->toArray(),
 			]);
