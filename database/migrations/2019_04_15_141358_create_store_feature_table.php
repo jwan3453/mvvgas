@@ -29,5 +29,6 @@ class CreateStoreFeatureTable extends Migration
     public function down()
     {
         //
+		Schema::dropIfExists('store_feature');
     }
 }

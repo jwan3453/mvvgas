@@ -34,6 +34,46 @@ class UsersTableSeeder extends Seeder
 			'store_pin' => '1111',
 			'password' => $password,
 			'role' =>2,
+			'location'=>1
+		]);
+		
+		User::create([
+			'name' => 'employee',
+			'store_pin' => '1112',
+			'password' => $password,
+			'role' =>2,
+			'location'=>2
+		]);
+		
+		User::create([
+			'name' => 'employee',
+			'store_pin' => '1113',
+			'password' => $password,
+			'role' =>2,
+			'location'=>3
+		]);
+		
+		User::create([
+			'name' => 'employee',
+			'store_pin' => '1114',
+			'password' => $password,
+			'role' =>2,
+			'location'=>4
+		]);
+		
+		User::create([
+			'name' => 'employee',
+			'store_pin' => '1115',
+			'password' => $password,
+			'role' =>2,
+			'location'=>5
+		]);
+		
+		User::create([
+			'name' => 'employee',
+			'store_pin' => '11110',
+			'password' => $password,
+			'role' =>2,
 			'location'=>10
 		]);
 		

@@ -30,5 +30,6 @@ class CreateIssueItemTable extends Migration
     public function down()
     {
         //
+		Schema::dropIfExists('issue_item');
     }
 }

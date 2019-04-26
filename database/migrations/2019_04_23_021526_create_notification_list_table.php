@@ -36,6 +36,7 @@ class CreateNotificationListTable extends Migration
     {
         Schema::table('notification_list', function (Blueprint $table) {
             //
+			Schema::dropIfExists('notification_list');
         });
     }
 }

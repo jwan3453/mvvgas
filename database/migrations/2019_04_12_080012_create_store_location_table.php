@@ -17,8 +17,8 @@ class CreateStoreLocationTable extends Migration
         Schema::create('store_location', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('email');
-            $table->string('mobile');
+            $table->string('email')->nullable();
+            $table->string('mobile')->nullable();
         });
     }
 
@@ -30,5 +30,6 @@ class CreateStoreLocationTable extends Migration
     public function down()
     {
         //
+		Schema::dropIfExists('store_location');
     }
 }

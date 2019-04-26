@@ -38,6 +38,8 @@ class StoreLocationTableSeeder extends Seeder
 			],
 			[
 				'name' => 'TM #10',
+				'email' => 'jackyloop@outlook.com',
+				'mobile' => '+8618250863109'
 			],
 		
 		];

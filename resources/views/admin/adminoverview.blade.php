@@ -70,8 +70,10 @@
 			<tr>
 				<th data-sortable="true" data-field="timestamp">Time Stamp</th>
 				<th data-field="status">Status</th>
+				<th data-field="reportedIssue">Reported Issue</th>
 				<th data-field="diagnosedIssues">Diagnosed Issue(s)</th>
 				<th data-field="description">Description</th>
+				<th data-field="location">Location</th>
 				<th data-sortable="true" data-field="feature">Feature</th>
 			</tr>
 			</thead>
@@ -123,9 +125,12 @@
 								{
 									"timestamp":issue.created_at,
 									"status": issue.status,
+									'reportedIssue':issue.reported_issue,
 									"diagnosedIssues": issue.diagnosed_issue,
 									"description":issue.description,
+									"location": 'TM #' + issue.location,
 									"feature":issue.feature
+									
 									
 									
 								}

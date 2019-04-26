@@ -64,7 +64,7 @@ class IssueController extends Controller
 		}
 		
 		foreach($issues as $issue) {
-			$issue->reported_issue = $reorderItems[$issue->reported_issue]->name;
+			$issue->reported_issue_text = $reorderItems[$issue->reported_issue]->name;
 			$diagnosedIssues = explode(',',$issue->diagnosed_issue );
 			$diagnosedIssuesString = '';
 			foreach($diagnosedIssues as $diagnosedIssue) {
@@ -73,7 +73,7 @@ class IssueController extends Controller
 				}
 			}
 			$issue->diagnosed_issue = rtrim($diagnosedIssuesString,',');
-			$issue->location = 'Tacoma Express #'.$issue->location;
+			//$issue->location = 'TM #'.$issue->location;
 		}
 		
 		
@@ -101,7 +101,7 @@ class IssueController extends Controller
 	public function createIssue(Request $request){
 		
 		$this->validate($request, [
-			'reportedIssue' => 'required|string',
+			'reportedIssue' => 'required',
 			'location' => 'required|numeric',
 			'feature' => 'required|string'
 		]);
@@ -121,10 +121,10 @@ class IssueController extends Controller
 			$storeLocation = StoreLocation::find($newIssue->location);
 			if(isset($storeLocation)) {
 				if($storeLocation->email != null) {
-					$this->sendIssueStatusEmail('none',$newIssue,$storeLocation->email);
+					//$this->sendIssueStatusEmail('none',$newIssue,$storeLocation->email);
 				}
 				if($storeLocation->mobile != null) {
-					$this->sendIssueStatusMsg('none',$newIssue,$storeLocation->mobile);
+					//$this->sendIssueStatusMsg('none',$newIssue,$storeLocation->mobile);
 				}
 			}
 		}
@@ -152,10 +152,10 @@ class IssueController extends Controller
 				$storeLocation = StoreLocation::find($issue->location);
 				if(isset($storeLocation)) {
 					if($storeLocation->email != null) {
-						$this->sendIssueStatusEmail($originStatus,$issue,$storeLocation->email);
+						//$this->sendIssueStatusEmail($originStatus,$issue,$storeLocation->email);
 					}
 					if($storeLocation->mobile != null) {
-						$this->sendIssueStatusMsg($originStatus,$issue,$storeLocation->mobile);
+						//$this->sendIssueStatusMsg($originStatus,$issue,$storeLocation->mobile);
 					}
 				}
 				
@@ -181,6 +181,26 @@ class IssueController extends Controller
 	
 	public function getIssueByLocation($location) {
 		$issueList =  Issue::where('location', intval($location))->where('status', "reported")->get();
+		
+		$issueItems = IssueItem::all();
+		$reorderItems = [];
+		foreach($issueItems as $issueItem ) {
+			$reorderItems[$issueItem->id] = $issueItem;
+		}
+		
+		foreach($issueList as $issue) {
+			$issue->reported_issue_text = $reorderItems[$issue->reported_issue]->name;
+			$diagnosedIssues = explode(',',$issue->diagnosed_issue );
+			$diagnosedIssuesString = '';
+			foreach($diagnosedIssues as $diagnosedIssue) {
+				if(is_numeric($diagnosedIssue)) {
+					$diagnosedIssuesString =  $diagnosedIssuesString.$reorderItems[$diagnosedIssue]->name.' ,';
+				}
+			}
+			$issue->diagnosed_issue = rtrim($diagnosedIssuesString,',');
+			//$issue->location = 'TM #'.$issue->location;
+		}
+		
 		return response()->json([
 			'status' => 'ok',
 			'list' => $issueList
@@ -193,6 +213,26 @@ class IssueController extends Controller
 				->select(DB::raw('count(*) as issueCount, location'))
 						->groupBy('location')->get();
 		$issueList = Issue::where('status', "reported")->get();
+
+		$reorderItems = [];
+		$issueItems = IssueItem::all();
+		foreach($issueItems as $issueItem ) {
+			$reorderItems[$issueItem->id] = $issueItem;
+		}
+
+		foreach($issueList as $issue) {
+			$issue->reported_issue_text = $reorderItems[$issue->reported_issue]->name;
+			$diagnosedIssues = explode(',',$issue->diagnosed_issue );
+			$diagnosedIssuesString = '';
+			foreach($diagnosedIssues as $diagnosedIssue) {
+				if(is_numeric($diagnosedIssue)) {
+					$diagnosedIssuesString =  $diagnosedIssuesString.$reorderItems[$diagnosedIssue]->name.' ,';
+				}
+			}
+			$issue->diagnosed_issue = rtrim($diagnosedIssuesString,',');
+			//$issue->location = 'TM #'.$issue->location;
+		}
+		
 		return response()->json([
 			'status' => 'ok',
 			'list' => $issueList,
@@ -276,7 +316,7 @@ class IssueController extends Controller
 		
 		$issues = $query->orderBy('id', 'desc')->get();
 		foreach($issues as $issue) {
-			$issue->reported_issue = $reorderItems[$issue->reported_issue]->name;
+			$issue->reported_issue_text = $reorderItems[$issue->reported_issue]->name;
 			$diagnosedIssues = explode(',',$issue->diagnosed_issue );
 			$diagnosedIssuesString = '';
 			foreach($diagnosedIssues as $diagnosedIssue) {
@@ -285,7 +325,7 @@ class IssueController extends Controller
 				}
 			}
 			$issue->diagnosed_issue = rtrim($diagnosedIssuesString,',');
-			$issue->location = 'Tacoma Express #'.$issue->location;
+			//$issue->location = 'TM #'.$issue->location;
 		}
 	
 		
