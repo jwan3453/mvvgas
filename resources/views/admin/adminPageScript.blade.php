@@ -51,7 +51,7 @@
 						)
 						
 						if(issue.feature.toLowerCase().indexOf('pump') !== -1) {
-							var pumpNo = /(?!Pump #)\d+/.exec(issue.feature);
+							var pumpNo = issue.feature.match(/Pump #(.*)/)[1]
 							$('td').each(function(){
 								var obj = $(this);
 								if(obj.attr('data-id') == ('{{$store.'-'}}'+pumpNo)) {
