@@ -137,10 +137,11 @@
 							)
 						
 							if(issue.feature.indexOf('Pump') !== -1) {
-								var pumpNo = /(?!Pump #)\d+/.exec(issue.feature);
+								var pumpNo =  issue.feature.match(/\d+$/);
+								console.log(pumpNo);
 								$('td').each(function(){
 									var obj = $(this);
-									if(obj.attr('data-id') == (issue.location+'-'+pumpNo)) {
+									if(obj.attr('data-id') == (issue.location+'-'+pumpNo[0])) {
 										obj.css({
 											color:'white',
 											background:'red',
