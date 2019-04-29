@@ -16,7 +16,7 @@
 		</tr>
 	</table>
 	
-	<div data-id="10-store" class= {{ $type == 'small'?"express10-store-small":'express10-store-regular'  }}>
+	<div data-id="10-store" id="10-store" class= {{ $type == 'small'?"express10-store-small":'express10-store-regular'  }}>
 		Store
 	</div>
 	

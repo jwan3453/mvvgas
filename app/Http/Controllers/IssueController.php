@@ -8,6 +8,7 @@ use App\IssueItem;
 use App\StoreLocation;
 use App\StoreFeature;
 use App\NotificationList;
+use Illuminate\Session\Store;
 use Illuminate\Support\Facades\DB;
 use \Illuminate\Database\Eloquent\ModelNotFoundException;
 use Carbon\Carbon;
@@ -55,9 +56,17 @@ class IssueController extends Controller
 		$total    = $query->count();
 		$pageSize = 10;
 		$offset   = $request->input('offset');
- 		$issues = $query->orderBy('id', 'desc')->skip($offset)->take($pageSize)->get();
-		
+		$order = $request->input('order');
+		$order = isset($order)?$order:'asc';
+ 		$issues = $query->orderBy('date_closed',$order )->skip($offset)->take($pageSize)->get();
 		$issueItems = IssueItem::all();
+		$locations = StoreLocation::all();
+		
+		$reorderLocations = [];
+		foreach($locations as $locationItem ) {
+			$reorderLocations[$locationItem->id] = $locationItem;
+		}
+		
 		$reorderItems = [];
 		foreach($issueItems as $issueItem ) {
 			$reorderItems[$issueItem->id] = $issueItem;
@@ -73,7 +82,7 @@ class IssueController extends Controller
 				}
 			}
 			$issue->diagnosed_issue = rtrim($diagnosedIssuesString,',');
-			//$issue->location = 'TM #'.$issue->location;
+			$issue->location_text = $reorderLocations[$issue->location]['name'];
 		}
 		
 		
@@ -82,18 +91,98 @@ class IssueController extends Controller
 				'closedAt' => $issue->date_closed,
 				'status' => $issue->status,
 				'reportedIssue' => $issue->reported_issue,
+				'reportedIssueText' => $issue->reported_issue_text,
 				'diagnosedIssues' => $issue->diagnosed_issue,
+				'locationText' => $issue->location_text,
 				'description' => $issue->description,
+				'location' => $issue->location,
 				'feature' => $issue->feature
 			
 			];
 		}
 		
 		return response()->json([
+			'status' => 'ok',
 			'total'    => $total,
 			'totalNotFiltered' => $total,
 			'pageSize' => $pageSize,
 			'rows'   => $result,
+		]);
+	}
+	
+	public function getIssueByLocation($location) {
+		$issueList =  Issue::where('location', intval($location))->whereIn('status', ["reported","on hold"])->get();
+		
+		$issueItems = IssueItem::all();
+		$locations = StoreLocation::all();
+		
+		
+		$reorderItems = [];
+		foreach($issueItems as $issueItem ) {
+			$reorderItems[$issueItem->id] = $issueItem;
+		}
+		
+		$reorderLocations = [];
+		foreach($locations as $locationItem ) {
+			$reorderLocations[$locationItem->id] = $locationItem;
+		}
+		
+		foreach($issueList as $issue) {
+			$issue->reported_issue_text = $reorderItems[$issue->reported_issue]->name;
+			$diagnosedIssues = explode(',',$issue->diagnosed_issue );
+			$diagnosedIssuesString = '';
+			foreach($diagnosedIssues as $diagnosedIssue) {
+				if(is_numeric($diagnosedIssue)) {
+					$diagnosedIssuesString =  $diagnosedIssuesString.$reorderItems[$diagnosedIssue]->name.' ,';
+				}
+			}
+			$issue->diagnosed_issue = rtrim($diagnosedIssuesString,',');
+			$issue->location_text = $reorderLocations[$issue->location]['name'];
+		}
+		
+		return response()->json([
+			'status' => 'ok',
+			'list' => $issueList
+		]);
+		
+	}
+	
+	public  function getAllOpenIssues() {
+		$storeCount = DB::table('issues')
+			->select(DB::raw('count(*) as issueCount, location'))
+			->whereIn('status', ["reported","on hold"])
+			->groupBy('location')->get();
+		$issueList = Issue::whereIn('status', ["reported","on hold"])->get();
+		
+		$locations = StoreLocation::all();
+		$reorderLocations = [];
+		foreach($locations as $locationItem ) {
+			$reorderLocations[$locationItem->id] = $locationItem;
+		}
+		
+		$reorderItems = [];
+		$issueItems = IssueItem::all();
+		foreach($issueItems as $issueItem ) {
+			$reorderItems[$issueItem->id] = $issueItem;
+		}
+		
+		foreach($issueList as $issue) {
+			$issue->reported_issue_text = $reorderItems[$issue->reported_issue]->name;
+			$diagnosedIssues = explode(',',$issue->diagnosed_issue );
+			$diagnosedIssuesString = '';
+			foreach($diagnosedIssues as $diagnosedIssue) {
+				if(is_numeric($diagnosedIssue)) {
+					$diagnosedIssuesString =  $diagnosedIssuesString.$reorderItems[$diagnosedIssue]->name.' ,';
+				}
+			}
+			$issue->diagnosed_issue = rtrim($diagnosedIssuesString,',');
+			$issue->location_text = $reorderLocations[$issue->location]['name'];
+		}
+		
+		return response()->json([
+			'status' => 'ok',
+			'list' => $issueList,
+			'count' => $storeCount,
 		]);
 	}
 
@@ -144,7 +233,13 @@ class IssueController extends Controller
 			// find user
 			$issue = Issue::findOrFail($id);
 			$originStatus = $issue->status;
-			$result =  $issue->update($request->all());
+			$issue->status = $request->input('status');
+			$issue->diagnosed_issue = $request->input('diagnosedIssue');
+			$issue->description = $request->input('description');
+			if($issue->status == 'closed') {
+				$issue->date_closed =Carbon::now();
+			}
+			$result = $issue->save();
 			$status = 'ok';
 			if(!$result) {
 				$status = 'fail';
@@ -163,7 +258,7 @@ class IssueController extends Controller
 			
 			return response()->json([
 				'status' => $status,
-				'item' => $request->all(),
+				'item' => $issue,
 			]);
 		}
 		catch (ModelNotFoundException $e)
@@ -179,66 +274,7 @@ class IssueController extends Controller
 
 	}
 	
-	public function getIssueByLocation($location) {
-		$issueList =  Issue::where('location', intval($location))->where('status', "reported")->get();
-		
-		$issueItems = IssueItem::all();
-		$reorderItems = [];
-		foreach($issueItems as $issueItem ) {
-			$reorderItems[$issueItem->id] = $issueItem;
-		}
-		
-		foreach($issueList as $issue) {
-			$issue->reported_issue_text = $reorderItems[$issue->reported_issue]->name;
-			$diagnosedIssues = explode(',',$issue->diagnosed_issue );
-			$diagnosedIssuesString = '';
-			foreach($diagnosedIssues as $diagnosedIssue) {
-				if(is_numeric($diagnosedIssue)) {
-					$diagnosedIssuesString =  $diagnosedIssuesString.$reorderItems[$diagnosedIssue]->name.' ,';
-				}
-			}
-			$issue->diagnosed_issue = rtrim($diagnosedIssuesString,',');
-			//$issue->location = 'TM #'.$issue->location;
-		}
-		
-		return response()->json([
-			'status' => 'ok',
-			'list' => $issueList
-		]);
 	
-	}
-	
-	public  function getAllOpenIssues() {
-		$storeCount = DB::table('issues')
-				->select(DB::raw('count(*) as issueCount, location'))
-						->groupBy('location')->get();
-		$issueList = Issue::where('status', "reported")->get();
-
-		$reorderItems = [];
-		$issueItems = IssueItem::all();
-		foreach($issueItems as $issueItem ) {
-			$reorderItems[$issueItem->id] = $issueItem;
-		}
-
-		foreach($issueList as $issue) {
-			$issue->reported_issue_text = $reorderItems[$issue->reported_issue]->name;
-			$diagnosedIssues = explode(',',$issue->diagnosed_issue );
-			$diagnosedIssuesString = '';
-			foreach($diagnosedIssues as $diagnosedIssue) {
-				if(is_numeric($diagnosedIssue)) {
-					$diagnosedIssuesString =  $diagnosedIssuesString.$reorderItems[$diagnosedIssue]->name.' ,';
-				}
-			}
-			$issue->diagnosed_issue = rtrim($diagnosedIssuesString,',');
-			//$issue->location = 'TM #'.$issue->location;
-		}
-		
-		return response()->json([
-			'status' => 'ok',
-			'list' => $issueList,
-			'count' => $storeCount,
-		]);
-	}
 	
 	public function getIssueItems() {
 		$issueItems = IssueItem::all();
@@ -272,7 +308,7 @@ class IssueController extends Controller
 			'status' => 'ok',
 			'issueItems' => $issueItems,
 			'locations' => $locations,
-			'storeFeatures' => $storeFeatures,
+			'features' => $storeFeatures,
 		]);
 	}
 	

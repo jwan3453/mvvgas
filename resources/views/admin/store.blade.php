@@ -9,7 +9,7 @@
 		<div class="site-logo"></div>
 		<a href="/adminoverview"><div class="header-btn">Main Menu</div></a>
 		<div class="store-text">Tacoma Market #<span id="location">{{$store}}</span></div>
-		<div class="logout-btn">Logout</div>
+		<a href="/logout"><div class="logout-btn">Logout</div></a>
 	</div>
 	
 	
@@ -30,7 +30,7 @@
 				<th data-field="reportedIssue">Reported Issue</th>
 				<th data-field="diagnosedIssues">Diagnosed Issue(s)</th>
 				<th data-field="description">Description</th>
-				<th data-sortable="true" data-field="feature">Feature</th>
+				<th data-field="feature">Feature</th>
 			</tr>
 			</thead>
 		</table>
@@ -41,6 +41,7 @@
 		<div class="issue-panel">
 			<div class="title" id="issueItemTitle">
 				Issue on <span id="issueFeatures"></span>
+				<div class="close-panel-icon"></div>
 			</div>
 			
 			<div style="padding:30px;">
@@ -52,13 +53,13 @@
 				
 				<div class="diagnosed-issue-panel" style="display: none" id="diagnosedIssuePanel">
 					<div class="issue-diagnosed">
-						<label>Diagnosed Reported:</label>
+						<label>Diagnosed issue(s):</label>
 						<div id="diagnosedIssueText"></div>
 					</div>
 					
 					<div class="issue-description">
-						<label>Please enter description</label>
-						<textarea id="issueDescription">please enter something</textarea>
+						<label>Enter followup on issue</label>
+						<textarea id="issueDescription"></textarea>
 					</div>
 					
 				</div>

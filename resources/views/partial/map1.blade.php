@@ -34,7 +34,7 @@
 			
 		</table>
 		
-		<div  data-id="1-store" class={{ $type == 'small'?"express1-store-small":"express1-store-regular"  }} "">
+		<div  data-id="1-store" git class={{ $type == 'small'?"express1-store-small":"express1-store-regular"  }} "">
 			Store
 		</div>
 		

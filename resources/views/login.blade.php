@@ -17,6 +17,17 @@
 	<script type="text/javascript">
 		$(document).ready(function (fn) {
 			
+			//checkout localstorage login info
+			var tokenObj = localStorage.getItem('token');
+			var token = '';
+			if(tokenObj) {
+				token = JSON.parse(tokenObj).token
+			}
+			
+			if(token) {
+				window.location.href = "/adminoverview";
+			}
+			
 			
 			function saveToLocalStorage(data){
 				localStorage.setItem( "token", JSON.stringify({
@@ -44,13 +55,15 @@
 							saveToLocalStorage(data.response);
 							if(data.response.role === 1) {
 								window.location.href = "/adminoverview";
+							} else {
+								toastAlert('Fail to login in, please check you pin code', 2);
 							}
 						} else {
 							toastAlert('Fail to login in, please check you pin code', 2);
 						}
 					},
 					error: function (jqXHR, textStatus, errorThrown) {
-						alert(textStatus)
+						alert(errorThrown)
 					}
 				});
 			})

@@ -22,21 +22,27 @@ class StoreLocationTableSeeder extends Seeder
 		
 		$storeLocations = [
 			[
-				'name' => 'TM #1',
+				'id' => 1,
+				'name' => 'TE #1',
 			],
 			[
-				'name' => 'TM #2',
+				'id' => 2,
+				'name' => 'TE #2',
 			],
 			[
-				'name' => 'TM #3',
+				'id' => 3,
+				'name' => 'TE #3',
 			],
 			[
-				'name' => 'TM #4',
+				'id' => 4,
+				'name' => 'TE #4',
 			],
 			[
-				'name' => 'TM #5',
+				'id' => 5,
+				'name' => 'TE #5',
 			],
 			[
+				'id' => 10,
 				'name' => 'TM #10',
 				'email' => 'jackyloop@outlook.com',
 				'mobile' => '+8618250863109'
@@ -47,6 +53,7 @@ class StoreLocationTableSeeder extends Seeder
 		
 		foreach($storeLocations as $storeLocation) {
 			StoreLocation::create([
+				'id' => $storeLocation['id'],
 				'name' => $storeLocation['name'],
 			]);
 		}

@@ -8,8 +8,8 @@
 @section('content')
 	<div class="site-header">
 		<div class="site-logo"></div>
-		<div class="header-btn">See Closed Issue</div>
-		<div class="logout-btn">Logout</div>
+		<a href="/adminoverview"><div class="header-btn">Main Menu</div></a>
+		<a href="/logout"><div class="logout-btn">Logout</div></a>
 	</div>
 	
 	<div style="padding: 10px 80px">
@@ -72,10 +72,11 @@
 			<tr>
 				<th data-sortable="true" data-field="closedAt">Close Date</th>
 				<th data-field="status">Status</th>
-				<th data-field="reportedIssue">Reported Issue</th>
+				<th data-field="reportedIssueText">Reported Issue</th>
 				<th data-field="diagnosedIssues">Diagnosed Issue(s)</th>
 				<th data-field="description">Description</th>
-				<th data-sortable="true" data-field="feature">Feature</th>
+				<th data-field="locationText">Location</th>
+				<th data-field="feature">Feature</th>
 			</tr>
 			</thead>
 		</table>
@@ -83,8 +84,9 @@
 	
 	<div class="page-modal" id="pageModal">
 		<div class="export-data-panel">
-			<div class="title" >
+			<div class="title"  id="exportDataTitle">
 				Export data
+				<div class="close-panel-icon"></div>
 			</div>
 			
 			<div class="export-filters">
@@ -138,6 +140,8 @@
 @section('script')
 	<script type="text/javascript">
 		
+		
+		
 		function filterQueryParams(params) {
 			var startDate = $('#startDate').val();
 			var endDate = $('#endDate').val();
@@ -176,6 +180,8 @@
 			var token = '';
 			if(tokenObj) {
 				token = JSON.parse(tokenObj).token
+			} else {
+			
 			}
 			
 			window.ajaxOptions = {
@@ -192,17 +198,24 @@
 			}  else {
 			
 			}
+
+			var today = new Date();
+			var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+			var tableData = [];
+			var issueItems = [];
+			var locations = [];
+			var storeFeatures = [];
+			
 			
 			$( "#startDate" ).datepicker({ dateFormat: 'yy-mm-dd' });
 			$( "#endDate" ).datepicker({ dateFormat: 'yy-mm-dd' });
 			$( "#startDateExport" ).datepicker({ dateFormat: 'yy-mm-dd' });
 			$( "#endDateExport" ).datepicker({ dateFormat: 'yy-mm-dd' });
 			
+			$( "#startDate" ).val(date);
+			$( "#endDate" ).val(date);
 			
-			var tableData = [];
-			var issueItems = [];
-			var locations = [];
-			var storeFeatures = [];
+			
 			
 			// get all issue items
 			$.ajax({
@@ -386,6 +399,10 @@
 				window.open("api/exporttofile?" + queryString)
 			});
 			
+			
+			$('#exportDataTitle').click(function(){
+				$('#pageModal').fadeOut();
+			})
 
 			
 //			function ajaxRequest(params)  {

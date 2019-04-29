@@ -660,8 +660,9 @@ a {
     top:50px;
     left: calc( 50% - 225px );
     position:absolute;
+    padding-bottom: 20px;
     width: 450px;
-    height: 650px;
+    height: auto;
     background:white;
 
 }
@@ -671,6 +672,17 @@ a {
     text-align: center;
     padding: 15px;
     border-bottom: 1px solid black;
+}
+
+.close-panel-icon{
+    background-size: 40px 40px;
+    background-image: url('../img/close.png');
+    width: 40px;
+    height: 40px;
+    position:absolute;
+    top:10px;
+    right:10px;
+    cursor: pointer;
 }
 
 .issue-reported, .issue-diagnosed{
@@ -683,11 +695,15 @@ a {
     vertical-align: top;
 }
 .issue-reported  div , .issue-diagnosed div {
-    width:250px;
+    width:220px;
     vertical-align: top;
     display: inline-block;
     font-size: 14px;
     margin-left:20px;
+
+}
+.issue-reported  div {
+    margin-left:50px;
 }
 
 
@@ -706,7 +722,7 @@ a {
 
 .issue-item-list {
     margin-top:10px;
-    height:405px;
+    max-height:405px;
     overflow-y: scroll;
 
 }
@@ -835,7 +851,7 @@ a {
     height: 25px;
     width:100px;
     text-align: center;
-    line-height: 20px;
+    line-height: 25px;
     font-size: 14px;
     color:black;
     margin-left: 20px ;
@@ -880,7 +896,7 @@ a {
     height: 30px;
     width:90%;
     text-align: center;
-    line-height: 20px;
+    line-height: 30px;
     font-size: 14px;
     color:black;
     margin: 20px auto;
@@ -894,3 +910,22 @@ a {
 }
 
 /***************************/
+
+
+/***********404************/
+.page-not-found {
+    text-align: center;
+    width:100%;
+    margin-top: 150px;
+}
+.back-btn {
+    width:100px;
+    height:40px;
+    border:1px solid black;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+    margin: 20px auto;
+}
+/**************************/

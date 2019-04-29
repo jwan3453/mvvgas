@@ -3,8 +3,8 @@
 @section('content')
 	<div class="site-header">
 		<div class="site-logo"></div>
-		<div class="header-btn">See Closed Issue</div>
-		<div class="logout-btn">Logout</div>
+		<a href="/closedissue"><div class="header-btn">See Closed Issue</div></a>
+		<a href="/logout"><div class="logout-btn">Logout</div></a>
 	</div>
 	
 	<div class="map-overview">
@@ -12,7 +12,7 @@
 			<div class="map-grid">
 				<div class="store-name">Tacoma Express #1</div>
 				@include('partial.map1', ['type'=>'small'])
-				<div class="issue-count" id="store1IssueCount">1232132</div>
+				<div class="issue-count" >Current Issues: <span id="store1IssueCount">0</span></div>
 			</div>
 		</a>
 		
@@ -20,7 +20,7 @@
 			<div class="map-grid">
 				<div class="store-name">Tacoma Express #2</div>
 				@include('partial.map2', ['type'=>'small'])
-				<div class="issue-count" id="store2IssueCount"></div>
+				<div class="issue-count" >Current Issues: <span id="store2IssueCount">0</span></div>
 			</div>
 		</a>
 		
@@ -28,7 +28,7 @@
 			<div class="map-grid">
 				<div class="store-name">Tacoma Express #3</div>
 				@include('partial.map3', ['type'=>'small'])
-				<div class="issue-count" id="store3IssueCount"></div>
+				<div class="issue-count" >Current Issues: <span id="store3IssueCount">0</span></div>
 			</div>
 		</a>
 		
@@ -37,7 +37,7 @@
 			<div class="map-grid">
 				<div class="store-name">Tacoma Express #4</div>
 				@include('partial.map4', ['type'=>'small'])
-				<div class="issue-count" id="store4IssueCount"></div>
+				<div class="issue-count" >Current Issues: <span id="store4IssueCount">0</span></div>
 			</div>
 		</a>
 		
@@ -45,7 +45,7 @@
 			<div class="map-grid">
 				<div class="store-name">Tacoma Express #5</div>
 				@include('partial.map5', ['type'=>'small'])
-				<div class="issue-count" id="store5IssueCount"></div>
+				<div class="issue-count" >Current Issues: <span id="store5IssueCount">0</span></div>
 			</div>
 		</a>
 		
@@ -53,7 +53,7 @@
 			<div class="map-grid">
 				<div class="store-name">Tacoma Express #10</div>
 				@include('partial.map10', ['type'=>'small'])
-				<div class="issue-count" id="store10IssueCount"></div>
+				<div class="issue-count" >Current Issues: <span id="store10IssueCount">0</span></div>
 			</div>
 		</a>
 	</div>
@@ -62,7 +62,7 @@
 	<div class="issue-list-table">
 		<div class="issue-list-header">
 			<div class="issue-header-text">Open Issues</div>
-			<div class="view-issue-btn">See Closed Issue</div>
+			<a href="/closedissue"><div class="view-issue-btn">See Closed Issue</div></a>
 		</div>
 		
 		<table id="table">
@@ -125,10 +125,10 @@
 								{
 									"timestamp":issue.created_at,
 									"status": issue.status,
-									'reportedIssue':issue.reported_issue,
+									'reportedIssue':issue.reported_issue_text,
 									"diagnosedIssues": issue.diagnosed_issue,
 									"description":issue.description,
-									"location": 'TM #' + issue.location,
+									"location": issue.location_text,
 									"feature":issue.feature
 									
 									
@@ -153,17 +153,26 @@
 									background:'red',
 								})
 							}
+							else if(issue.feature.indexOf('Store') !== -1) {
+								$('#' +issue.location+'-store').css({
+									color:'white',
+									background:'red',
+								})
+							}
 						});
 						
 						storeCount.map((countItem) => {
 							//console.log('#store' + countItem.location + 'IssueCount');
-							$('#store' + countItem.location + 'IssueCount').text("Current issues: "+ countItem.issueCount);
-						})
+							$('#store' + countItem.location + 'IssueCount').text(countItem.issueCount);
+						});
 						
 					}
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
-					alert(textStatus)
+					if(errorThrown === 'Unauthorized') {
+						localStorage.removeItem('token');
+						window.location.href = "/login";
+					}
 				}
 			});
 			

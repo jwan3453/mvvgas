@@ -14,11 +14,15 @@
 use Twilio\Rest\Client;
 
 Route::get('/', function () {
-
+	return view('login');
 });
 
 Route::get('/login', function(){
 	return view('login');
+});
+
+Route::get('/logout', function(){
+	return view('logout');
 });
 
 Route::get('/adminoverview', function(){

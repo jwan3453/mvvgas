@@ -1,7 +1,7 @@
 <div class="map-container-wrapper" >
 	<div class={{ $type == 'small'?"map-container-small":"map-container"  }}>
 		
-		<div data-id="4-store" class={{ $type == 'small'?"express4-store-small":"express4-store-regular"  }}>
+		<div data-id="4-store" id="4-store" class={{ $type == 'small'?"express4-store-small":"express4-store-regular"  }}>
 			Store
 		</div>
 		

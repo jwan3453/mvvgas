@@ -312,175 +312,175 @@ class StoreFeatureSeeder extends Seeder
 				'feature' => 'Store',
 			],
 			
-			//location 6
+			//location 10
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #1',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #1D',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #2',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #2D',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #3',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #3D',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #4',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #4D',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #5',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #6',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #7',
 			],
 
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #8',
 			],
 
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #9',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #10',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #11',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #12',
 			],
 			
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #13',
 			],
 			
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #14',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #15',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #16',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #17',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #18',
 			],
 			
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #19',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #20',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #21',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #21D',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #22',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #22D',
 			],			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #23',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #23D',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #24',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #24D',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #25',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #25D',
 			],			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #26',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #26D',
 			],			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #27',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #27D',
 			],			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #84',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Pump #28D',
 			],
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Car Wash',
 			],
 			
 			[
-				'location' => 6,
+				'location' => 10,
 				'feature' => 'Store',
 			],
 			

@@ -41,7 +41,7 @@
 							{
 								"timestamp":issue.created_at,
 								"status": issue.status,
-								'reportedIssue': issue.reported_issue,
+								'reportedIssue': issue.reported_issue_text,
 								"diagnosedIssues": issue.diagnosed_issue,
 								"description":issue.description,
 								"feature":issue.feature
@@ -130,7 +130,7 @@
 				}
 				
 				else if(dataId.toLowerCase().includes('store') && issueItems[i].type.toLowerCase() === 'store'){
-					// render issue list for carwash
+					// render issue list for store
 					$('#issueItemList').append(
 						'<div class="issue-item" data-id="'+issueItems[i].id+'">'+issueItems[i].name+'</div>'
 					);
@@ -156,7 +156,7 @@
 					issueItemsString = dataList[i].reported_issue;
 					console.log();
 					
-				} else if(dataId.toLowerCase().includes('store') && dataList[i].feature.includes('store')) {
+				} else if(dataId.toLowerCase().includes('store') && dataList[i].feature.toLowerCase().includes('store')) {
 					// highlight  reported issue for store
 					//todo
 					currentIssueData =  dataList[i];
@@ -259,8 +259,10 @@
 				success: function (data) {
 					if(data.status === 'ok') {
 						toastAlert('operation success',1);
-						closeIssueItemList();
-						fetchOpenIssues();
+						window.location.reload()
+//						closeIssueItemList();
+//						fetchOpenIssues();
+						
 					} else {
 						toastAlert('something went wrong, please try again',1);
 					}
@@ -272,8 +274,13 @@
 		}
 		
 		$('#onHoldBtn').click(function(){
+			console.log(currentIssueData.description);
+			if($('#issueDescription').val() === '') {
+				toastAlert('please enter followup on issue',2);
+				return;
+			}
 			if(currentIssueData) {
-				currentIssueData.diagnosed_issue = $('#diagnosedIssueItem').val();
+				currentIssueData.diagnosedIssue = $('#diagnosedIssueItem').val();
 				currentIssueData.description = $('#issueDescription').val();
 				currentIssueData.status = 'on hold';
 				submitIssue(currentIssueData);
@@ -282,8 +289,12 @@
 		})
 		
 		$('#closeIssueBtn').click(function(){
+			if($('#issueDescription').val() === '') {
+				toastAlert('please enter followup on issue',2);
+				return;
+			}
 			if(currentIssueData) {
-				currentIssueData.diagnosed_issue = $('#diagnosedIssueItem').val();
+				currentIssueData.diagnosedIssue = $('#diagnosedIssueItem').val();
 				currentIssueData.description = $('#issueDescription').val();
 				currentIssueData.status = 'closed';
 				submitIssue(currentIssueData);
