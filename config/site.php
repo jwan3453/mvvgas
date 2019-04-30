@@ -10,10 +10,5 @@ return [
 	'twilio_number' => '+14153902217',
 	
 	'server' => 'http://127.0.0.1',
-
 	
-	
-
-	
-
 ];
