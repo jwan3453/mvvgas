@@ -9,15 +9,7 @@ return [
 	
 	'twilio_number' => '+14153902217',
 	
-//	'smtp_server' => 'smtp.qq.com',
-//
-//	'smtp_port' => '465',
-//
-//	'smtp_user_email' => '294671945@qq.com',
-//
-//	'smtp_user' => '294671945',
-//
-//	'smtp_password' => 'daohaoshisb',
+	'server' => 'http://127.0.0.1',
 
 	
 	

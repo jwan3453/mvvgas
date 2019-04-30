@@ -220,7 +220,7 @@
 			// get all issue items
 			$.ajax({
 				type: 'GET',
-				async: false,
+				async: true,
 				url: ' /api/issueitems',
 				dataType: 'json',
 				headers: {

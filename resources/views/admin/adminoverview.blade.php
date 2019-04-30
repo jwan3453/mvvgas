@@ -105,7 +105,7 @@
 			
 			$.ajax({
 				type: 'GET',
-				async: false,
+				async: true,
 				url: '/api/issues/openissues',
 				dataType: 'json',
 				headers: {

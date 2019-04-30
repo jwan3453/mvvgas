@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
 		
 		User::create([
 			'name' => 'Administrator',
-			'store_pin' => '1234',
+			'store_pin' => 'Mvvadmin!',
 			'password' => $password,
 			'role' =>1
 		]);
@@ -39,7 +39,7 @@ class UsersTableSeeder extends Seeder
 		
 		User::create([
 			'name' => 'employee',
-			'store_pin' => '1112',
+			'store_pin' => '2222',
 			'password' => $password,
 			'role' =>2,
 			'location'=>2
@@ -47,7 +47,7 @@ class UsersTableSeeder extends Seeder
 		
 		User::create([
 			'name' => 'employee',
-			'store_pin' => '1113',
+			'store_pin' => '3333',
 			'password' => $password,
 			'role' =>2,
 			'location'=>3
@@ -55,7 +55,7 @@ class UsersTableSeeder extends Seeder
 		
 		User::create([
 			'name' => 'employee',
-			'store_pin' => '1114',
+			'store_pin' => '4444',
 			'password' => $password,
 			'role' =>2,
 			'location'=>4
@@ -63,7 +63,7 @@ class UsersTableSeeder extends Seeder
 		
 		User::create([
 			'name' => 'employee',
-			'store_pin' => '1115',
+			'store_pin' => '5555',
 			'password' => $password,
 			'role' =>2,
 			'location'=>5
@@ -71,7 +71,7 @@ class UsersTableSeeder extends Seeder
 		
 		User::create([
 			'name' => 'employee',
-			'store_pin' => '11110',
+			'store_pin' => '1010',
 			'password' => $password,
 			'role' =>2,
 			'location'=>10

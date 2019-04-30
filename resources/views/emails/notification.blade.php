@@ -1,3 +1,3 @@
 <div>
-	Test email {{$content}}
+	{{$content}}
 </div>

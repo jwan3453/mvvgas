@@ -85,7 +85,7 @@
 		// fetch issue item list
 		$.ajax({
 			type: 'GET',
-			async: false,
+			async: true,
 			url: '/api/issueitems',
 			dataType: 'json',
 			headers: {
@@ -244,17 +244,27 @@
 		})
 		
 		
-		function submitIssue(issueData){
+		var processing = false;
+		
+		function submitIssue(issueData, clickedBtn){
+			console.log(processing);
+			if(processing  === true) {
+				return;
+			}
+
+			var originText = clickedBtn.text();
+			clickedBtn.text('processing...');
+			processing = true;
 			$.ajax({
 				type: 'PUT',
-				async: false,
+				async: true,
 				url: '/api/issues/' + issueData.id,
 				dataType: 'json',
 				data:issueData,
 				headers: {
 					'Accept': 'application/json',
 					'Authorization': 'Bearer ' + token
-					
+
 				},
 				success: function (data) {
 					if(data.status === 'ok') {
@@ -262,19 +272,23 @@
 						window.location.reload()
 //						closeIssueItemList();
 //						fetchOpenIssues();
-						
+
 					} else {
 						toastAlert('something went wrong, please try again',1);
 					}
+					clickedBtn.text(originText);
+					processing = false;
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
+					clickedBtn.text(originText);
+					processing = false;
 					alert(textStatus)
 				}
 			});
 		}
 		
 		$('#onHoldBtn').click(function(){
-			console.log(currentIssueData.description);
+			var obj = $(this);
 			if($('#issueDescription').val() === '') {
 				toastAlert('please enter followup on issue',2);
 				return;
@@ -283,12 +297,13 @@
 				currentIssueData.diagnosedIssue = $('#diagnosedIssueItem').val();
 				currentIssueData.description = $('#issueDescription').val();
 				currentIssueData.status = 'on hold';
-				submitIssue(currentIssueData);
+				submitIssue(currentIssueData,obj);
 			}
 			
 		})
 		
 		$('#closeIssueBtn').click(function(){
+			var obj = $(this);
 			if($('#issueDescription').val() === '') {
 				toastAlert('please enter followup on issue',2);
 				return;
@@ -297,7 +312,7 @@
 				currentIssueData.diagnosedIssue = $('#diagnosedIssueItem').val();
 				currentIssueData.description = $('#issueDescription').val();
 				currentIssueData.status = 'closed';
-				submitIssue(currentIssueData);
+				submitIssue(currentIssueData,obj);
 			}
 		})
 		

@@ -210,10 +210,10 @@ class IssueController extends Controller
 			$storeLocation = StoreLocation::find($newIssue->location);
 			if(isset($storeLocation)) {
 				if($storeLocation->email != null) {
-					//$this->sendIssueStatusEmail('none',$newIssue,$storeLocation->email);
+					$this->sendIssueStatusEmail('none',$newIssue,$storeLocation);
 				}
 				if($storeLocation->mobile != null) {
-					//$this->sendIssueStatusMsg('none',$newIssue,$storeLocation->mobile);
+					$this->sendIssueStatusMsg('none',$newIssue,$storeLocation);
 				}
 			}
 		}
@@ -247,10 +247,10 @@ class IssueController extends Controller
 				$storeLocation = StoreLocation::find($issue->location);
 				if(isset($storeLocation)) {
 					if($storeLocation->email != null) {
-						//$this->sendIssueStatusEmail($originStatus,$issue,$storeLocation->email);
+						$this->sendIssueStatusEmail($originStatus,$issue,$storeLocation);
 					}
 					if($storeLocation->mobile != null) {
-						//$this->sendIssueStatusMsg($originStatus,$issue,$storeLocation->mobile);
+						$this->sendIssueStatusMsg($originStatus,$issue,$storeLocation);
 					}
 				}
 				
@@ -391,22 +391,31 @@ class IssueController extends Controller
 		
 	}
 	
-	function sendIssueStatusEmail($originStatus, $issue, $address){
+	function sendIssueStatusEmail($originStatus, $issue, $location){
 		
 		
 		$type = 'email';
 		$fromStatus = $originStatus;
 		$feature = $issue->feature;
-		$location = $issue->location;
 		$toStatus = $issue->status;
 		$description = $issue->description;
-		$toAddress = $address;
+		$manager = $location->manager;
+		$toAddress = $location->email;
+		$messageBody = '';
 		
-		$message = 'Location #'.$issue->location.' '.$issue->feature.' change status from '.$fromStatus.' to '.$toStatus.'. Description: '.$issue->description;
-		$subject = 'Location #'.$issue->location.' '.$issue->feature;
+		$client = new Client(config('site.twilio_acount_id'), config('site.twilio_token'));
+		if($toStatus == 'reported' || $toStatus == 'on hold' ) {
+			$subject = 'Issue Reported';
+			$messageBody = 'Hi '.$manager. ', there is a new incident report for '.$feature.' available at '.config('site.server').'/adminlocationview/'.$location->id;
+		} else {
+			$subject = 'Issue Closed';
+			$messageBody = 'Hi '.$manager. ', an incident for '.$feature.' was recently closed. To view this issue please go to '.config('site.server').'/closedissue';
+		}
+		
+		
 		$result = Mail::send(
 			'emails.notification',
-			['content' => $message],
+			['content' => $messageBody],
 			function ($message) use($toAddress, $subject) {
 				$message->to($toAddress)->subject($subject);
 			}
@@ -416,7 +425,7 @@ class IssueController extends Controller
 			$newMobileNotification =  new NotificationList();
 			$newMobileNotification->type = $type;
 			$newMobileNotification->feature = $feature;
-			$newMobileNotification->location = $location;
+			$newMobileNotification->location = $location->id;
 			$newMobileNotification->from_status = $fromStatus;
 			$newMobileNotification->to_status = $toStatus;
 			$newMobileNotification->description = $description;
@@ -426,22 +435,29 @@ class IssueController extends Controller
 	
 	}
 	
-	function sendIssueStatusMsg($originStatus, $issue, $address){
+	function sendIssueStatusMsg($originStatus, $issue, $location){
 		
 		$type = 'message';
 		$fromStatus = $originStatus;
 		$feature = $issue->feature;
-		$location = $issue->location;
 		$toStatus = $issue->status;
 		$description = $issue->description;
-		$toAddress = $address;
-		
+		$manager = $location->manager;
+		$toAddress = $location->mobile;
+		$messageBody  = '';
 		$client = new Client(config('site.twilio_acount_id'), config('site.twilio_token'));
+		if($toStatus == 'reported' || $toStatus == 'on hold' ) {
+			$messageBody = 'Hi '.$manager. ', there is a new incident report for '.$feature.' available at '.config('site.server').'/adminlocationview/'.$location->id;
+		} else {
+			$messageBody = 'Hi '.$manager. ', an incident for '.$feature.' was recently closed. To view this issue please go to '.config('site.server').'/closedissue';
+		}
+		
+		
 		$result = $client->messages->create(
 			$toAddress,
 			array(
 				'from' => config('site.twilio_number'),
-				'body' => 'Location #'.$issue->location.' '.$issue->feature.' change status from '.$fromStatus.' to '.$toStatus.'. Description: '.$issue->description
+				'body' => $messageBody,
 			)
 		);
 		if(isset($result) && $result->errorCode == null) {
@@ -449,7 +465,7 @@ class IssueController extends Controller
 			$newMobileNotification =  new NotificationList();
 			$newMobileNotification->type = $type;
 			$newMobileNotification->feature = $feature;
-			$newMobileNotification->location = $location;
+			$newMobileNotification->location = $location->id;
 			$newMobileNotification->from_status = $fromStatus;
 			$newMobileNotification->to_status = $toStatus;
 			$newMobileNotification->description = $description;

@@ -24,28 +24,44 @@ class StoreLocationTableSeeder extends Seeder
 			[
 				'id' => 1,
 				'name' => 'TE #1',
+				'email' => '',
+				'mobile' => '',
+				'manager' => 'manager'
 			],
 			[
 				'id' => 2,
 				'name' => 'TE #2',
+				'email' => '',
+				'mobile' => '',
+				'manager' => 'manager'
 			],
 			[
 				'id' => 3,
 				'name' => 'TE #3',
+				'email' => '',
+				'mobile' => '',
+				'manager' => 'manager'
 			],
 			[
 				'id' => 4,
 				'name' => 'TE #4',
+				'email' => '',
+				'mobile' => '',
+				'manager' => 'manager'
 			],
 			[
 				'id' => 5,
 				'name' => 'TE #5',
+				'email' => '',
+				'mobile' => '',
+				'manager' => 'manager'
 			],
 			[
 				'id' => 10,
 				'name' => 'TM #10',
 				'email' => 'jackyloop@outlook.com',
-				'mobile' => '+8618250863109'
+				'mobile' => '+8618250863109',
+				'manager' => 'manager'
 			],
 		
 		];
@@ -55,6 +71,9 @@ class StoreLocationTableSeeder extends Seeder
 			StoreLocation::create([
 				'id' => $storeLocation['id'],
 				'name' => $storeLocation['name'],
+				'email' => $storeLocation['email'],
+				'mobile' => $storeLocation['mobile'],
+				'manager' => $storeLocation['manager'],
 			]);
 		}
 		

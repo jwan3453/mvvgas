@@ -63,7 +63,12 @@
 						}
 					},
 					error: function (jqXHR, textStatus, errorThrown) {
-						alert(errorThrown)
+						console.warn(jqXHR.responseJSON);
+						if(jqXHR.responseJSON && jqXHR.responseJSON.store_pin) {
+							toastAlert('Fail to login in, please check you pin code', 2);
+						} else {
+							alert(error);
+						}
 					}
 				});
 			})

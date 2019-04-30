@@ -19,6 +19,7 @@ class CreateStoreLocationTable extends Migration
             $table->string('name');
             $table->string('email')->nullable();
             $table->string('mobile')->nullable();
+            $table->string('manager')->nullable();
         });
     }
 
