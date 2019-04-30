@@ -225,6 +225,7 @@ a {
     font-size: 20px;
     text-align: center;
     margin-top:50px;
+    cursor: pointer;
 }
 /************************************/
 
@@ -280,6 +281,7 @@ a {
     font-size: 20px;
     text-align: center;
     margin-top:50px;
+    cursor: pointer;
 }
 /************************************/
 
@@ -352,6 +354,7 @@ a {
     font-size: 20px;
     text-align: center;
     margin-top:50px;
+    cursor: pointer;
 }
 
 .express3-store-carwash-regular {
@@ -362,6 +365,7 @@ a {
     vertical-align: top;
     display: inline-block;
     margin-left: 100px;
+    cursor: pointer;
 }
 
 /************************************/
@@ -419,6 +423,7 @@ a {
     font-size: 20px;
     text-align: center;
     margin-top:50px;
+    cursor: pointer;
 }
 /************************************/
 
@@ -474,6 +479,7 @@ a {
     font-size: 20px;
     text-align: center;
     margin-top:50px;
+    cursor: pointer;
 }
 /************************************/
 
@@ -574,6 +580,7 @@ a {
     line-height: 200px;
     font-size: 20px;
     text-align: center;
+    cursor: pointer;
 
 }
 
@@ -587,6 +594,7 @@ a {
     line-height: 60px;
     font-size: 20px;
     text-align: center;
+    cursor: pointer;
 }
 
 .express10-bottomleft-regular {
