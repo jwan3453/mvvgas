@@ -350,6 +350,13 @@ class IssueController extends Controller
 			$reorderItems[$issueItem->id] = $issueItem;
 		}
 		
+		$locations = StoreLocation::all();
+		$reorderLocations = [];
+		foreach($locations as $locationItem ) {
+			$reorderLocations[$locationItem->id] = $locationItem;
+		}
+		
+		
 		$issues = $query->orderBy('id', 'desc')->get();
 		foreach($issues as $issue) {
 			$issue->reported_issue_text = $reorderItems[$issue->reported_issue]->name;
@@ -361,7 +368,7 @@ class IssueController extends Controller
 				}
 			}
 			$issue->diagnosed_issue = rtrim($diagnosedIssuesString,',');
-			//$issue->location = 'TM #'.$issue->location;
+			$issue->location_text = $reorderLocations[$issue->location]['name'];
 		}
 	
 		
@@ -382,7 +389,7 @@ class IssueController extends Controller
 			fputcsv($file, $columns);
 			
 			foreach($issues as $issue) {
-				fputcsv($file, array($issue->date_closed, $issue->reported_issue, $issue->diagnosed_issue, $issue->location, $issue->feature));
+				fputcsv($file, array($issue->date_closed, $issue->reported_issue, $issue->diagnosed_issue, $issue->location_text, $issue->feature));
 			}
 			fclose($file);
 		};
