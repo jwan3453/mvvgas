@@ -85,7 +85,7 @@
 		// fetch issue item list
 		$.ajax({
 			type: 'GET',
-			async: true,
+			async: false,
 			url: '/api/issueitems',
 			dataType: 'json',
 			headers: {

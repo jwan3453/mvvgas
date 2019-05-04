@@ -58,9 +58,25 @@ class IssueController extends Controller
 		$offset   = $request->input('offset');
 		$order = $request->input('order');
 		$order = isset($order)?$order:'asc';
- 		$issues = $query->orderBy('date_closed',$order )->skip($offset)->take($pageSize)->get();
+ 		$issues = $query->skip($offset)->take($pageSize)->get();
 		$issueItems = IssueItem::all();
 		$locations = StoreLocation::all();
+		
+		if($order == 'asc') {
+			$issues = $issues->sort(function ($a, $b) {
+				if ($a->date_closed == $b->date_closed) {
+					return 0;
+				}
+				return ($a->date_closed < $b->date_closed) ? -1 : 1;
+			});
+		} else {
+			$issues = $issues->sort(function ($a, $b) {
+				if ($a->date_closed == $b->date_closed) {
+					return 0;
+				}
+				return ($a->date_closed > $b->date_closed) ? -1 : 1;
+			});
+		}
 		
 		$reorderLocations = [];
 		foreach($locations as $locationItem ) {

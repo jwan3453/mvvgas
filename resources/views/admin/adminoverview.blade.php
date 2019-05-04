@@ -105,7 +105,7 @@
 			
 			$.ajax({
 				type: 'GET',
-				async: true,
+				async: false,
 				url: '/api/issues/openissues',
 				dataType: 'json',
 				headers: {
@@ -135,6 +135,7 @@
 									
 								}
 							)
+						$('#table').bootstrapTable('refresh');
 						
 							if(issue.feature.indexOf('Pump') !== -1) {
 								var pumpNo = issue.feature.match(/Pump #(.*)/)[1];
